@@ -1,0 +1,23 @@
+<h1>Recipes</h1>
+<h2><%= pluralize(@recipes.total_count, "recipe") %> found</h2>
+<% @recipes.each_slice(2) do |recipe_pair| %>
+<div style="display: flex; gap: 2rem; margin-bottom: 1rem;">
+    <% recipe_pair.each do |recipe| %>
+    <div style="flex: 1; border: 1px solid #ccc; padding: 1rem; border-radius: 8px;">
+        <h3><%= recipe.title %></h3>
+        <% if recipe.image_url.present? %>
+        <img src="<%= normalized_image_url(recipe.image_url) %>" alt="<%= recipe.title %>" style="width: 200px; height: 200px; object-fit: cover; margin-bottom: 0.5rem;">
+        <% end %>
+        <p><strong>Prep time:</strong> <%= recipe.prep_time %> min</p>
+        <p><strong>Cook time:</strong> <%= recipe.cook_time %> min</p>
+        <p><strong>Ingredients:</strong></p>
+        <ul>
+            <% recipe.ingredients.each do |ingredient| %>
+            <li><%= ingredient %></li>
+            <% end %>
+        </ul>
+    </div>
+    <% end %>
+</div>
+<% end %>
+<%= paginate @recipes %>
