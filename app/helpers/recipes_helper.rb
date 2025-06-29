@@ -12,4 +12,16 @@ module RecipesHelper
   rescue URI::InvalidURIError
     url
   end
+
+  def highlight_ingredients(ingredient, query)
+    return ingredient if query.blank?
+
+    words = query.to_s.scan(/\w+/).uniq
+    return ingredient if words.empty?
+
+    regex = Regexp.union(words.map { |w| Regexp.escape(w) })
+    ingredient.gsub(regex) do |match|
+      "<mark style=\"background:yellow;font-weight:bold;\">#{match}</mark>"
+    end.html_safe
+  end
 end

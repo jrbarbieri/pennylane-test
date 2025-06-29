@@ -47,6 +47,8 @@ Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: consistent_comma
 Style/StringLiterals:
   Enabled: false
+Style/Lambda:
+  EnforcedStyle: literal
 
 Rails:
   Enabled: true

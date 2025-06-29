@@ -1,8 +1,8 @@
 <h1>Recipes</h1>
-<h2><%= pluralize(@recipes.total_count, "recipe") %> found</h2>
 <%= form_tag(recipes_path, method: :get) do %>
-  <%= text_field_tag :query, params[:query], autofocus: true %>
+  <%= text_field_tag :query, params[:query], autofocus: true, required: true %>
   <%= button_tag "Search", type: :submit, name: nil %>
+  <h3><%= @query ? "#{pluralize(@recipes.total_count, "recipe")} found" : ''%></h3>
 <% end %>
 <br>
 <% @recipes.each_slice(2) do |recipe_pair| %>
@@ -18,7 +18,7 @@
         <p><strong>Ingredients:</strong></p>
         <ul>
           <% recipe.ingredients.each do |ingredient| %>
-            <li><%= ingredient %></li>
+            <li><%= highlight_ingredients(ingredient, @query) %></li>
           <% end %>
         </ul>
       </div>
