@@ -1,5 +1,10 @@
 <h1>Recipes</h1>
 <h2><%= pluralize(@recipes.total_count, "recipe") %> found</h2>
+<%= form_tag(recipes_path, method: :get) do %>
+  <%= text_field_tag :query, params[:query], autofocus: true %>
+  <%= button_tag "Search", type: :submit, name: nil %>
+<% end %>
+<br>
 <% @recipes.each_slice(2) do |recipe_pair| %>
   <div style="display: flex; gap: 2rem; margin-bottom: 1rem;">
     <% recipe_pair.each do |recipe| %>
