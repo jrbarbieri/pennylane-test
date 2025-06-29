@@ -1,8 +1,56 @@
-# Omakase Ruby styling for Rails
-inherit_gem: { rubocop-rails-omakase: rubocop.yml }
+plugins:
+  - rubocop-rails
 
-# Overwrite or add rules to create your own house style
-#
-# # Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
-# Layout/SpaceInsideArrayLiteralBrackets:
-#   Enabled: false
+AllCops:
+  TargetRubyVersion: 3.3
+  NewCops: enable
+  Exclude:
+    - 'bin/**/*'
+    - 'db/schema.rb'
+    - 'db/migrate/*.rb'
+    - 'node_modules/**/*'
+    - 'vendor/**/*'
+    - 'config/environments/*.rb'
+    - 'config/initializers/*'
+    - 'spec/**/*'
+    - 'test/**/*'
+
+Layout/LineLength:
+  Max: 120
+  AllowHeredoc: true
+  AllowURI: true
+
+Layout/IndentationWidth:
+  Enabled: true
+  Width: 2
+
+Layout/FirstParameterIndentation:
+  Enabled: true
+  EnforcedStyle: consistent
+
+Layout/TrailingEmptyLines:
+  Enabled: true
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: consistent_comma
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+Style/StringLiterals:
+  Enabled: false
+
+Rails:
+  Enabled: true
+Rails/OutputSafety:
+  Enabled: true
+Rails/SkipsModelValidations:
+  Exclude:
+    - 'db/seeds.rb'
