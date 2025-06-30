@@ -29,6 +29,7 @@ gem "kamal", require: false
 gem "thruster", require: false
 
 # Project's gems
+gem "jsbundling-rails"
 gem "kaminari"
 
 group :development, :test do
