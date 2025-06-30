@@ -1,16 +1,16 @@
-# fly.toml app configuration file generated for pennylane-test-h2es3g on 2025-06-30T07:37:25Z
+# fly.toml app configuration file generated for pennylane-test-wmmwkw on 2025-06-30T07:46:12Z
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'pennylane-test-h2es3g'
+app = 'pennylane-test-wmmwkw'
 primary_region = 'gru'
 console_command = '/rails/bin/rails console'
 
 [build]
 
 [http_service]
-  internal_port = 8080
+  internal_port = 3000
   force_https = true
   auto_stop_machines = 'stop'
   auto_start_machines = true
