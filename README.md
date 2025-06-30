@@ -4,7 +4,7 @@ This project was created to make it easier to find recipes based on the ingredie
 
 URL: https://pennylane-test-233ff4da568b.herokuapp.com/
 
-![Site demo](site.gif)
+![Site demo](app/assets/images/site.gif)
 
 ## User Stories
 
