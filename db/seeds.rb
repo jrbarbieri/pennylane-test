@@ -1,7 +1,7 @@
 # rubocop:disable Rails/Output
 require "json"
 
-JSON_RECIPE_PATH = "tmp/recipes-en.json".freeze
+JSON_RECIPE_PATH = "recipes-en.json".freeze
 
 file_path = Rails.root.join(JSON_RECIPE_PATH)
 data = JSON.parse(File.read(file_path))
