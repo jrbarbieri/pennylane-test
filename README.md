@@ -2,6 +2,10 @@
 
 This project was created to make it easier to find recipes based on the ingredients I have available (or by recipe title as well). I developed the application with a focus on making it simple and fast to discover new meal ideas. The frontend is built with React to provide a dynamic experience, while the backend uses Rails to manage data and integrate with a PostgreSQL database. The project also explores the integration between Rails and modern JavaScript tools, such as asset bundling and dependency management.
 
+URL: https://pennylane-test-233ff4da568b.herokuapp.com/
+
+![Site demo](site.gif)
+
 ## User Stories
 
 1. **As a user, I want to browse a list of recipes, so that I can discover new dishes to prepare.**
