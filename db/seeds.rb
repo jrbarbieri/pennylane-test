@@ -10,7 +10,7 @@ puts "Seeds started. #{data.size} recipes to be added."
 
 recipes = data.map do |recipe|
   ingredients_array = recipe["ingredients"] || []
-  ingredients_search = ingredients_array.join(", ")
+  ingredients_search = ([recipe["title"]] + ingredients_array).join(", ")
 
   {
     title: recipe["title"],
