@@ -1,27 +1,14 @@
+require 'uri'
+
 module RecipesHelper
-  def normalized_image_url(url)
-    return url if url.blank?
+  def normalized_image_url(original_url)
+    uri = URI.parse(original_url)
+    params = URI.decode_www_form(uri.query || "").to_h
+    image_url = params["url"]
 
-    uri = URI.parse(url)
-    if uri.host == "imagesvc.meredithcorp.io" && uri.query.present?
-      params = Rack::Utils.parse_query(uri.query)
-      original_url = params["url"]
-      return original_url if original_url.present?
-    end
-    url
-  rescue URI::InvalidURIError
-    url
-  end
+    return 'https://www.allrecipes.com/img/misc/og-default.png' unless image_url
 
-  def highlight_ingredients(ingredient, query)
-    return ingredient if query.blank?
-
-    words = query.to_s.scan(/\w+/).uniq
-    return ingredient if words.empty?
-
-    regex = Regexp.union(words.map { |w| Regexp.escape(w) })
-    ingredient.gsub(regex) do |match|
-      "<mark style=\"background:yellow;font-weight:bold;\">#{match}</mark>"
-    end.html_safe
+    encoded_url = URI.encode_www_form_component(image_url)
+    "https://imagesvc.meredithcorp.io/v3/mm/image?url=#{encoded_url}&q=60&c=sc&poi=auto&orient=true&h=512"
   end
 end
