@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_30_090227) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_08_232808) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -23,7 +23,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_30_090227) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "ingredients_search"
-    t.tsvector "ingredients_search_vector"
-    t.index ["ingredients_search_vector"], name: "index_recipes_on_ingredients_search_vector", using: :gin
+    t.virtual "ingredients_search_vector", type: :tsvector, as: "to_tsvector('english'::regconfig, COALESCE(ingredients_search, ''::text))", stored: true
   end
 end

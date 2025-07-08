@@ -26,9 +26,5 @@ recipes.each_slice(100) do |batch|
   Recipe.insert_all(batch)
 end
 
-ActiveRecord::Base.connection.execute(
-  "UPDATE recipes SET ingredients_search_vector = to_tsvector('english', coalesce(ingredients_search, ''))",
-)
-
 puts "Seeds ended!"
 # rubocop:enable Rails/Output
