@@ -32,6 +32,10 @@ Layout/FirstParameterIndentation:
 Layout/TrailingEmptyLines:
   Enabled: true
 
+Metrics/MethodLength:
+  Max: 20
+  Enabled: true
+
 Style/FrozenStringLiteralComment:
   Enabled: false
 Style/Documentation:

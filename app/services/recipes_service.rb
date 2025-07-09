@@ -20,7 +20,13 @@ class RecipesService
               else
                 Recipe.all
               end
-      scope.order(created_at: :desc)
+      paginated = scope.order(created_at: :desc).page(@page).per(@per_page)
+      {
+        recipes: paginated.map { |recipe| recipe },
+        total_pages: paginated.total_pages,
+        total_recipes: paginated.total_count,
+        current_page: paginated.current_page,
+      }
     end
   end
 
@@ -29,13 +35,14 @@ class RecipesService
     "recipes/#{query_digest}/page/#{@page}"
   end
 
-  # rubocop:disable Metrics/MethodLength
   def serialize_recipes(normalized_image_url_proc = nil)
-    recipes = fetch_recipes
-    paginated = Kaminari.paginate_array(recipes).page(@page).per(@per_page)
+    data = fetch_recipes
     {
       query: @query,
-      recipes: paginated.map do |recipe|
+      total_pages: data[:total_pages],
+      total_recipes: data[:total_recipes],
+      current_page: data[:current_page],
+      recipes: data[:recipes].map do |recipe|
         {
           id: recipe.id,
           title: recipe.title,
@@ -45,10 +52,6 @@ class RecipesService
           image_url: normalized_image_url_proc ? normalized_image_url_proc.call(recipe.image_url) : recipe.image_url,
         }
       end,
-      total_pages: paginated.total_pages,
-      total_recipes: paginated.total_count,
-      current_page: paginated.current_page,
     }
   end
-  # rubocop:enable Metrics/MethodLength
 end
