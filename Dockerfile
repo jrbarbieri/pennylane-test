@@ -6,17 +6,23 @@ ENV RAILS_ENV=development \
 
 RUN apt-get update -qq && \
     apt-get install -y nodejs npm postgresql-client && \
-    npm install -g yarn
+    npm install -g yarn esbuild
 
 WORKDIR /app
 
+COPY package.json ./
+
+RUN npm install -g yarn && \
+    yarn install --check-files
+
 COPY Gemfile Gemfile.lock ./
+
 RUN bundle install
 
 COPY . .
 
-RUN yarn install --check-files || true
+ENV PATH="/app/node_modules/.bin:${PATH}"
 
 EXPOSE 3000
 
-CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
+CMD ["bin/dev"]

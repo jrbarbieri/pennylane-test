@@ -1,2 +1,2 @@
-web: env RUBY_DEBUG_OPEN=true bin/rails server
-js: yarn build --watch
+web: bundle exec rails server -b 0.0.0.0 -p 3000
+js: PATH="./node_modules/.bin:$PATH" yarn build --watch=forever
