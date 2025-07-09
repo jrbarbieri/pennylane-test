@@ -46,7 +46,8 @@ Rails.application.configure do
   # Replace the default in-process memory cache store with a durable alternative.
   config.cache_store = :redis_cache_store, {
     url: ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" },
-    namespace: "cache"
+    namespace: "cache",
+    ssl_params: { verify_mode: OpenSSL::SSL::VERIFY_NONE }
   }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
