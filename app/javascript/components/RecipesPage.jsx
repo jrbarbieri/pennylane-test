@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import SearchSidebar from "./SearchSidebar";
 import RecipeCards from "./RecipeCards";
 import Pagination from "./Pagination";
-import { fetchRecipesService } from "./recipesService";
+import { fetchRecipesService } from "../services/recipesService";
 import QuickMenu from "./QuickMenu";
 import Header from "./Header";
 import EmptyState from "./EmptyState";

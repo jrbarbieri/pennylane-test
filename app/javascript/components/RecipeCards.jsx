@@ -3,7 +3,18 @@ import React from "react";
 export default function RecipeCards({ recipes, query }) {
   function highlightQuery(text, query) {
     if (!query) return text;
-    const regex = new RegExp(`(${query})`, "ig");
+    const ignoreWords = ["and", "or"];
+    const words = query
+      .split(/[^\wÀ-ÿ]+/)
+      .map((w) => w.trim().toLowerCase())
+      .filter((w) => w && !ignoreWords.includes(w));
+    if (words.length === 0) return text;
+    const regex = new RegExp(
+      `(${words
+        .map((w) => w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
+        .join("|")})`,
+      "gi"
+    );
     const parts = text.split(regex);
     return parts.map((part, i) =>
       regex.test(part) ? (
