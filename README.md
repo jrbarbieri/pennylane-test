@@ -24,31 +24,56 @@ URL: https://pennylane-test-233ff4da568b.herokuapp.com/
 
 ## Getting Started
 
-### 1. Install System Dependencies
+You can run the project either using Docker (recommended for simplicity) or by manually installing all dependencies on your system. Choose the method that best fits your workflow.
+
+### Option 1: Running Locally with Docker Compose
+
+1. Make sure you have Docker and Docker Compose installed.
+2. In your terminal, run:
+
+```sh
+docker compose up --build
+```
+
+This will:
+- Start a Postgres database in a container
+- Start the Rails application in another container
+- Automatically run `rails db:setup` on startup
+- Make the app available at http://localhost:3000
+
+To reset the database, stop and remove the containers and volumes:
+
+```sh
+docker compose down -v
+```
+
+### Option 2: Running Locally by Installing Dependencies Manually
+
+#### 1. Install System Dependencies
 
 - Ruby 3.3.0
 - Node.js (recommended: latest LTS)
 - PostgreSQL
 
-### 2. Install Ruby Gems
+#### 2. Install Ruby Gems
 
 ```sh
 bundle install
 ```
 
-### 3. Install JavaScript Dependencies
+#### 3. Install JavaScript Dependencies
 
 ```sh
 yarn install
 ```
 
-### 4. Set Up the Database
+#### 4. Set Up the Database
 
 ```sh
 rails db:setup
 ```
 
-### 5. Start the Application
+#### 5. Start the Application
 
 ```sh
 bin/dev
