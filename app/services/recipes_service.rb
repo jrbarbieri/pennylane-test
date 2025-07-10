@@ -20,7 +20,7 @@ class RecipesService
               else
                 Recipe.all
               end
-      paginated = scope.order(created_at: :desc).page(@page).per(@per_page)
+      paginated = scope.order(Arel.sql('cardinality(ingredients) ASC')).page(@page).per(@per_page)
       {
         recipes: paginated.map { |recipe| recipe },
         total_pages: paginated.total_pages,
